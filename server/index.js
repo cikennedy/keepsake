@@ -7,12 +7,12 @@ import postRoutes from './routes/posts.js';
 
 const app = express();
 
-// localhost:5000/posts
-app.use('/posts', postRoutes);
-
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
+// localhost:5000/posts
+app.use('/posts', postRoutes);
 
 // connect to mongodb cloud atlas database
 const CONNECTION_URL = 'mongodb+srv://lbkk:K3dcntHDAjHCWJJU@kenken.awtuc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
