@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
+import { useDispatch } from 'react-redux';
 
 import useStyles from './styles';
+import { createPost } from '../../actions/posts';
 
 const Form = () => {
     const [postData, setPostData] = useState({
@@ -13,9 +15,15 @@ const Form = () => {
         selectedFile: '',
     });
     const classes = useStyles();
+    const dispatch = useDispatch();
 
-    const handleSubmit = () => {
+    // once user submits, sends post request with all the data a user types in
+    const handleSubmit = (e) => {
+        // always say this not to get a refresh in the browser
+        e.preventDefault();
 
+        // pass all data from state into createPost
+        dispatch(createPost(postData));
     }
 
     const clear = () => {
@@ -31,8 +39,8 @@ const Form = () => {
                 // all the data will persist while only changing the specific property
                 onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
                 />
-                <TextField name='title' variant='outlined' label='Title' fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, title: e.target.value })}/>
-                <TextField name='message' variant='outlined' label='Message' fullWidth value={postData.message} onChange={(e) => setPostData({ ...postData, messsage: e.target.value })}/>
+                <TextField name='title' variant='outlined' label='Title' fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })}/>
+                <TextField name='message' variant='outlined' label='Message' fullWidth value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })}/>
                 <TextField name='tags' variant='outlined' label='Tags' fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value })}/>
                 <div className={classes.fileInput}>
                     <FileBase

@@ -4,7 +4,8 @@ export default (posts = [], action) => {
         case 'FETCH_ALL':
             return action.payload;
         case 'CREATE':
-            return posts;
+            // send an array of posts, first spread the posts and add a new post stored in the action payload
+            return [...posts, action.payload];
         default:
             return posts;
     }
