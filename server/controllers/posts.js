@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 
 // needs to use async await as finding messages takes time 
@@ -15,6 +16,8 @@ export const createPosts = async (req, res) => {
     const post = req.body;
 
     const newPost = new PostMessage(post);
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
 
     try {
         await newPost.save();
