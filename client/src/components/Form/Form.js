@@ -4,7 +4,7 @@ import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
-import { createPost } from '../../actions/posts';
+import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({
@@ -28,6 +28,12 @@ const Form = ({ currentId, setCurrentId }) => {
     const handleSubmit = (e) => {
         // always say this not to get a refresh in the browser
         e.preventDefault();
+
+        if(currentId) {
+            dispatch(updatePost(currentId, postData));
+        } else {
+            dispatch(createPost(postData));
+        }
 
         // pass all data from state into createPost
         dispatch(createPost(postData));

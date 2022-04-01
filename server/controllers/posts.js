@@ -12,12 +12,10 @@ export const getPosts = async (req, res) => {
     }
 }
 
-export const createPosts = async (req, res) => {
+export const createPost = async (req, res) => {
     const post = req.body;
 
     const newPost = new PostMessage(post);
-
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
 
     try {
         await newPost.save();
@@ -26,4 +24,17 @@ export const createPosts = async (req, res) => {
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
+}
+
+export const updatePost = async (req, res) => {
+    // destructure object and rename property to _id
+    const { id: _id } = req.params;
+
+    const post = req.body;
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, { new: true });
+
+    res.json(updatedPost);
 }
