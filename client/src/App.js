@@ -13,14 +13,16 @@ const App = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    // once we clear the form, it changes the currentId
+    // the app will dispatch the getPosts action
     useEffect(() => {
         dispatch(getPosts());
-    }, [dispatch]);
+    }, [currentId, dispatch]);
 
     return (
         <Container maxwidth='lg'>
             <AppBar className={classes.appBar} position='static' color='inherit'>
-                <Typography className={classes.heading} variant="h2" align="center">Keepsakes</Typography>
+                <Typography className={classes.heading} variant="h2" align="center">Keepsake</Typography>
                 <img className={classes.image} src={memories} alt="memories" height="60"/>
             </AppBar>
             <Grow in>
