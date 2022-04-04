@@ -1,7 +1,9 @@
-import React from 'react'
-import { AppBar, Typography } from '@material-ui/core'
+import React from 'react';
+import { AppBar, Typography } from '@material-ui/core';
 
-import React from 'react'
+import memories from '../../images/memories.png';
+
+import useStyles from './styles';
 
 const Navbar = () => {
     const classes = useStyles();
