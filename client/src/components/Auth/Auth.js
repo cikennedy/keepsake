@@ -27,6 +27,14 @@ const Auth = () => {
     handleShowPassword(false);
   }
 
+  const googleSuccess = (res) => {
+    console.log(res);
+  }
+
+  const googleFailure = () => {
+    console.log("Google Sign In was unsuccessful. Try again later.");
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
@@ -47,8 +55,11 @@ const Auth = () => {
               <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
               { isSignUp && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" /> }
           </Grid>
+          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+            {isSignUp ? 'Sign Up' : 'Sign In'}
+          </Button>
           <GoogleLogin 
-            clientId="GOOGLE ID"
+            clientId="1034325304222-2fr5v640pa33ifln9vmklvrpaoukbgd7.apps.googleusercontent.com"
             render={(renderProps) => (
               <Button className={classes.googleButton} 
               color='primary' 
@@ -60,10 +71,10 @@ const Auth = () => {
                 Google Sign In
               </Button>
             )}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
+              cookiePolicy="single_host_origin"
           />
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-            {isSignUp ? 'Sign Up' : 'Sign In'}
-          </Button>
           <Grid container justify="flex-end">
                 <Grid item>
                   <Button onClick={switchMode}>
