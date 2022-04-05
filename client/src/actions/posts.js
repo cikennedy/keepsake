@@ -1,5 +1,6 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
-import * as api from '../api';
+
+import * as api from '../api/index';
 
 // action creators are functions that return an action
 // actions have a type and a payload 
