@@ -1,11 +1,12 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
 // in reducers, state always needs to be equal to something, in this case state=posts
 export default (posts = [], action) => {
     switch (action.type) {
         case DELETE:
             return posts.filter((post) => post._id !== action.payload);
-        case UPDATE:    
+        case UPDATE:
+        case LIKE:    
             return posts.map((post) => post._id === action.payload._id ? action.payload : post);
         case FETCH_ALL:
             return action.payload;
