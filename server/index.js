@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import postRoutes from './routes/posts.js';
+import userRoutes from './routes/users.js';
 
 const app = express();
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(cors());
 
 // localhost:5000/posts
 app.use('/posts', postRoutes);
+app.use('/user', userRoutes);
 
 // connect to mongodb cloud atlas database
 // const CONNECTION_URL = 'mongodb+srv://lbkk:K3dcntHDAjHCWJJU@kenken.awtuc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
