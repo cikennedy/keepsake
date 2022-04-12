@@ -3,8 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Button, Avatar } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
-import memories from '../../images/memories.png';
-
+import keepsakes from '../../images/keepsakes.png';
 import useStyles from './styles';
 
 const Navbar = () => {
@@ -31,7 +30,7 @@ const Navbar = () => {
     <AppBar className={classes.appBar} position='static' color='inherit'>
         <div className={classes.brandContainer}>
             <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Keepsake</Typography>
-            <img className={classes.image} src={memories} alt="memories" height="60"/>
+            <img className={classes.image} src={keepsakes} alt="keepsakes" height="60"/>
         </div>
         <Toolbar className={classes.toolbar}>
             {user ? (
