@@ -1,5 +1,4 @@
 import express from 'express';
-import { getPostsBySearch } from '../../client/src/actions/posts.js';
 
 import { getPostsBySearch, getPosts, createPost, updatePost, deletePost, likePost } from '../controllers/posts.js';
 
