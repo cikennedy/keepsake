@@ -16,7 +16,7 @@ app.use(cors());
 
 // localhost:5000/posts
 app.use('/posts', postRoutes);
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
 
 // connect to mongodb cloud atlas database
 // const CONNECTION_URL = 'mongodb+srv://lbkk:K3dcntHDAjHCWJJU@kenken.awtuc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
