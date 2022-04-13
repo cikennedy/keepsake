@@ -12,8 +12,6 @@ const Posts = ({ setCurrentId }) => {
     const posts = useSelector((state) => state.posts);
     const classes = useStyles();
 
-    console.log(posts);
-
     return (
         // if there are no posts, show circular progress
         !posts.length ? <CircularProgress /> : (
