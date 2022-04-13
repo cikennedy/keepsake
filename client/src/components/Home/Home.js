@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from 'material-ui-chip-input';
 
 import { useDispatch } from 'react-redux';
-import { getPosts } from '../../actions/posts';
+import { getPosts, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 import Pagination from '../Pagination';
@@ -34,7 +34,7 @@ const Home = () => {
 
     const searchPost = () => {
       if(search.trim()) {
-        // dispatch -> fetch search post
+        dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
       } else {
         history.push('/');
       }
@@ -86,7 +86,7 @@ const Home = () => {
                  label="Search Tags"
                  variant="outlined"
                  />
-                 <Button onClick={searchPost} className={classes.searchButton} color="primary" >Search</Button>
+                 <Button onClick={searchPost} className={classes.searchButton} color="primary" variant="contained" >Search</Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6} >

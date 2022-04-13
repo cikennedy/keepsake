@@ -12,6 +12,18 @@ export const getPosts = () => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
+};
+
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+    try {
+        // destructure the data twice, first because we are making an axios request
+        // second because we are putting it in a new object with the data property
+        const { data: { data }} = await api.fetchPostsBySearch(searchQuery);
+
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export const createPost = (post) => async (dispatch) => {
@@ -22,7 +34,7 @@ export const createPost = (post) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const updatePost = (id, post) => async (dispatch) => {
     try {
@@ -33,7 +45,7 @@ export const updatePost = (id, post) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const deletePost = (id) => async (dispatch) => {
     try {
@@ -44,7 +56,7 @@ export const deletePost = (id) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 export const likePost = (id) => async (dispatch) => {
     try {
@@ -54,4 +66,4 @@ export const likePost = (id) => async (dispatch) => {
     } catch (error) {
         console.log(error);
     }
-}
+};
