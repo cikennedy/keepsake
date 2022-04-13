@@ -7,12 +7,13 @@ import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
-    const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+    const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
 
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
 
     const classes = useStyles();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
         if(post) setPostData(post);
@@ -23,18 +24,30 @@ const Form = ({ currentId, setCurrentId }) => {
         // always say this not to get a refresh in the browser
         e.preventDefault();
 
-        if(currentId) {
-            dispatch(updatePost(currentId, postData));
+        if(currentId === 0) {
+            dispatch(createPost({ ...postData, name: user?.result?.name }))
+            clear();
         } else {
-            dispatch(createPost(postData));
+            dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+            clear();
         }
 
         clear();
+    };
+
+    if(!user?.result?.name) {
+        return (
+            <Paper className={classes.paper}>
+                <Typography variant="h6" align="center">
+                    Sign in for full features. 
+                </Typography>
+            </Paper>
+        )
     }
 
     const clear = () => {
         setCurrentId(null);
-        setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+        setPostData({ title: '', message: '', tags: '', selectedFile: '' });
     }
 
     return (
