@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pagination, PaginationItem } from '@material-ui/lab';
-import { link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
 
@@ -15,7 +15,7 @@ const Paginate = () => {
             variant="outlined"
             color="primary"
             renderItem={(item) => (
-                <PaginationItem {...item} component={link} to={`/posts?page=${1}`} />
+                <PaginationItem {...item} component={Link} to={`/posts?page=${1}`} />
             )}
         />
     )
