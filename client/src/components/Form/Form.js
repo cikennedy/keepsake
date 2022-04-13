@@ -2,38 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
-
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
-
+    const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const history = useHistory();
 
     useEffect(() => {
+        if(!post?.title) clear();
         if(post) setPostData(post);
-    }, [post])
+    }, [post]);
+
+    const clear = () => {
+        setCurrentId(0);
+        setPostData({ title: '', message: '', tags: [], selectedFile: '' });
+    };
 
     // once user submits, sends post request with all the data a user types in
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         // always say this not to get a refresh in the browser
         e.preventDefault();
-
-        if(currentId === 0) {
-            dispatch(createPost({ ...postData, name: user?.result?.name }))
-            clear();
+    
+        if (currentId === 0) {
+          dispatch(createPost({ ...postData, name: user?.result?.name }, history));
+          clear();
         } else {
-            dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
-            clear();
+          dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+          clear();
         }
-
-        clear();
-    };
+      };
 
     if(!user?.result?.name) {
         return (
@@ -43,11 +47,6 @@ const Form = ({ currentId, setCurrentId }) => {
                 </Typography>
             </Paper>
         )
-    }
-
-    const clear = () => {
-        setCurrentId(null);
-        setPostData({ title: '', message: '', tags: '', selectedFile: '' });
     }
 
     return (
