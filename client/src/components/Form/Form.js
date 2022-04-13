@@ -41,11 +41,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant='h6'>{currentId ? 'Edit' : "Create"} Keepsake</Typography>
-                <TextField name='creator' variant='outlined' label='Creator' fullWidth value={postData.creator}
-                // spread postData, meaning in every text field and we do the same thing but only change the last property,
-                // all the data will persist while only changing the specific property
-                onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
-                />
                 <TextField name='title' variant='outlined' label='Title' fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })}/>
                 <TextField name='message' variant='outlined' label='Message' fullWidth value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })}/>
                 <TextField name='tags' variant='outlined' label='Tags' fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}/>
