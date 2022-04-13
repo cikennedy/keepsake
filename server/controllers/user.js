@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import mongoose from 'mongoose';
 import User from '../models/user.js';
 
 export const signin = async (req, res) => {
@@ -30,7 +29,7 @@ export const signup = async (req, res) => {
     try {
         const existingUser = await User.findOne({ email });
 
-        if(existingUser) return res.status(404).json({ message: "User already exists." });
+        if(existingUser) return res.status(400).json({ message: "User already exists." });
 
         if(password !== confirmPassword) return res.status(400).json({ message: "Passwords don't match." });
 
