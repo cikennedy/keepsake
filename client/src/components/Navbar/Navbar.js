@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import decode from 'jwt-decode';
 
-import keepsakes from '../../images/keepsakes.png';
+import keepsakes from '../../images/keepsake.png';
 import useStyles from './styles';
 
 const Navbar = () => {
@@ -37,10 +37,10 @@ const Navbar = () => {
 
   return (
     <AppBar className={classes.appBar} position='static' color='inherit'>
-        <div className={classes.brandContainer}>
-            <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Keepsake</Typography>
+        <Link to='/' className={classes.brandContainer}>
+            <Typography className={classes.heading} variant="h2" align="center">KEEPSAKE</Typography>
             <img className={classes.image} src={keepsakes} alt="keepsakes" height="60"/>
-        </div>
+        </Link>
         <Toolbar className={classes.toolbar}>
             {user ? (
                 <div className={classes.profile}>
