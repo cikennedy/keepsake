@@ -4,9 +4,11 @@ import * as api from '../api/index';
 
 // action creators are functions that return an action
 // actions have a type and a payload 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
     try {
         const { data } = await api.fetchPosts();
+
+        console.log(data);
 
         dispatch({ type: FETCH_ALL, payload: data });
     } catch (error) {

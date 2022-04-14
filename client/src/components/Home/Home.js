@@ -26,12 +26,6 @@ const Home = () => {
     const [search, setSearch] = useState('');
     const [tags, setTags] = useState([]);
 
-    // once we clear the form, it changes the currentId
-    // the app will dispatch the getPosts action
-    useEffect(() => {
-        dispatch(getPosts());
-    }, [currentId, dispatch]);
-
     const searchPost = () => {
       if(search.trim() || tags) {
         dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
@@ -92,7 +86,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6} >
-              <Pagination />
+              <Pagination page={page} />
             </Paper>
           </Grid>
         </Grid>
