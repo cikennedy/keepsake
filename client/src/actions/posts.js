@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
 import * as api from '../api/index';
 
@@ -18,9 +18,9 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     try {
         // destructure the data twice, first because we are making an axios request
         // second because we are putting it in a new object with the data property
-        const { data: { data }} = await api.fetchPostsBySearch(searchQuery);
+        const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
 
-        console.log(data);
+        dispatch({ type: FETCH_BY_SEARCH, payload: data });
     } catch (error) {
         console.log(error);
     }
