@@ -1,10 +1,10 @@
-import React, { useState, useEffect }from "react";
+import React, { useState }from "react";
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
 import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from 'material-ui-chip-input';
 
 import { useDispatch } from 'react-redux';
-import { getPosts, getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
 
 import Pagination from '../Pagination';
@@ -85,9 +85,11 @@ const Home = () => {
                  <Button onClick={searchPost} className={classes.searchButton} color="primary" variant="contained" >Search</Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            <Paper elevation={6} >
-              <Pagination page={page} />
-            </Paper>
+            {(!searchQuery && !tags.length) && (
+              <Paper elevation={6} >
+                <Pagination page={page} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>
