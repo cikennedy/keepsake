@@ -13,8 +13,10 @@ const Paginate = ({ page }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(page) dispatch(getPosts(page));
-    }, [page]);
+        if(page) {
+            dispatch(getPosts(page));
+        }
+    }, [dispatch, page]);
 
 
     return (
