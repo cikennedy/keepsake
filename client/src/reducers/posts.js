@@ -8,11 +8,11 @@ export default (state = { isLoading: true, post: [] }, action) => {
         case END_LOADING:
             return { ...state, isLoading: false };
         case DELETE:
-            return { ...state, posts: state.filter((post) => post._id !== action.payload)};
+            return { ...state, posts: state.posts.filter((post) => post._id !== action.payload)};
         case UPDATE:
-            return { ...state, posts: state.map((post) => post._id === action.payload._id ? action.payload : post)};
+            return { ...state, posts: state.posts.map((post) => post._id === action.payload._id ? action.payload : post)};
         case LIKE:    
-            return { ...state, posts: state.map((post) => post._id === action.payload._id ? action.payload : post)};
+            return { ...state, posts: state.posts.map((post) => post._id === action.payload._id ? action.payload : post)};
         case FETCH_ALL:
             return {
                 // always spread the state when working with objects
@@ -25,7 +25,7 @@ export default (state = { isLoading: true, post: [] }, action) => {
             return { ...state, posts: action.payload };
         case CREATE:
             // send an array of posts, first spread the state and add a new post stored in the action payload
-            return { ...state, posts: [...state, action.payload]};
+            return { ...state, posts: [...state.posts, action.payload]};
         default:
             return state;
     }
