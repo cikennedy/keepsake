@@ -7,7 +7,7 @@ export const getPosts = async (req, res) => {
 
     try {
         // number of posts per page 
-        const LIMIT = 2;
+        const LIMIT = 8;
         // get starting index of each page
         const startIndex = (Number(page) - 1) * LIMIT;
         const total = await PostMessage.countDocuments({});
@@ -15,7 +15,7 @@ export const getPosts = async (req, res) => {
         // sort by id which will give us newest posts first, limited to LIMIT per page 
         const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
 
-        res.status(200).json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
+        res.json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
