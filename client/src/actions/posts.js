@@ -11,7 +11,7 @@ export const getPosts = (page) => async (dispatch) => {
 
         console.log(data);
 
-        dispatch({ type: FETCH_ALL, payload: data, currentPage, numberOfPages });
+        dispatch({ type: FETCH_ALL, payload: { data, currentPage, numberOfPages } });
         dispatch({ type: END_LOADING });
     } catch (error) {
         console.log(error);
