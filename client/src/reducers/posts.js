@@ -1,4 +1,4 @@
-import { FETCH_ALL, FETCH_POST, CREATE, UPDATE, DELETE, LIKE, COMMENT, FETCH_BY_SEARCH, START_LOADING, END_LOADING } from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_POST, CREATE, UPDATE, DELETE, LIKE, COMMENT, FETCH_BY_SEARCH, FETCH_BY_CREATOR, START_LOADING, END_LOADING } from '../constants/actionTypes';
 
 // in reducers, state always needs to be equal to something, in this case state=posts
 export default (state = { isLoading: true, posts: [] }, action) => {
@@ -34,7 +34,9 @@ export default (state = { isLoading: true, posts: [] }, action) => {
         case FETCH_POST:
             return { ...state, post: action.payload };
         case FETCH_BY_SEARCH:
-            return { ...state, posts: action.payload };
+            return { ...state, posts: action.payload.data };
+        case FETCH_BY_CREATOR:
+            return { ...state, posts: action.payload.data };
         case CREATE:
             // send an array of posts, first spread the state and add a new post stored in the action payload
             return { ...state, posts: [...state.posts, action.payload] };

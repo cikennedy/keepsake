@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams, useHistory, Link } from 'react-router-dom';
+// import useHistory for future dev
+import { useParams, Link } from 'react-router-dom';
 
 import { getPost, getPostsBySearch } from '../../actions/posts';
 import CommentSection from './CommentSection';
 import useStyles from './styles';
 
 const Post = () => {
-  const { post, posts, isLoading } = useSelector((state) => state.posts);
+  // destructure posts when including recommended posts for future dev
+  const { post, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const classes = useStyles();
   const { id } = useParams();
 
@@ -31,7 +33,7 @@ const Post = () => {
 
   if (!post) return null;
 
-  const openPost = (_id) => history.push(`/posts/${_id}`);
+  // const openPost = (_id) => history.push(`/posts/${_id}`);
 
   if (isLoading) {
     return (
@@ -41,7 +43,7 @@ const Post = () => {
     );
   }
 
-  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
+  // const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -69,10 +71,10 @@ const Post = () => {
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
-          <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+          <img className={classes.media} src={post.selectedFile} alt={post.title} />
         </div>
       </div>
-      {!!recommendedPosts.length && (
+      {/* {!!recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">You might also like:</Typography>
           <Divider />
@@ -88,7 +90,7 @@ const Post = () => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </Paper>
   );
 };
