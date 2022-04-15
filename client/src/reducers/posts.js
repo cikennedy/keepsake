@@ -25,7 +25,7 @@ export default (state = { isLoading: true, post: [] }, action) => {
             return { ...state, posts: action.payload };
         case CREATE:
             // send an array of posts, first spread the state and add a new post stored in the action payload
-            return { ...state, posts: [...state.posts, action.payload]};
+            return { ...state, posts: [...state.posts, action.payload] };
         default:
             return state;
     }

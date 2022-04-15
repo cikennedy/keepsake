@@ -7,7 +7,7 @@ import * as api from '../api/index';
 export const getPosts = (page) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
-        const { data } = await api.fetchPosts();
+        const { data: { data, currentPage, numberOfPages } } = await api.fetchPosts(page);
 
         console.log(data);
 
