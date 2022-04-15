@@ -8,7 +8,7 @@ import { getPost, getPostsBySearch } from '../../actions/posts';
 import CommentSection from './CommentSection';
 import useStyles from './styles';
 
-const PostDetails = () => {
+const Post = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -93,4 +93,4 @@ const PostDetails = () => {
   );
 };
 
-export default PostDetails
+export default Post

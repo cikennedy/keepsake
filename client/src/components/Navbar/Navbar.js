@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { AppBar, Typography, Toolbar, Button, Avatar } from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Button, Avatar, Divider } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
 import decode from 'jwt-decode';
@@ -40,7 +40,8 @@ const Navbar = () => {
     <AppBar className={classes.appBar} position='static' color='inherit'>
         <Link to='/' className={classes.brandContainer}>
             <img className={classes.image} src={keepsakes} alt="keepsake logo" height="75"/>
-            <Typography className={classes.heading} sx={{ ml: 15 }} variant="h2" align="center">KEEPSAKE</Typography>
+            <Divider style={{ margin: '20px 20px' }} />
+            <Typography className={classes.heading}  variant="h2" align="center">KEEPSAKE</Typography>
         </Link>
         <Toolbar className={classes.toolbar}>
             {user ? (
