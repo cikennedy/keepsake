@@ -12,7 +12,6 @@ import { deletePost, likePost } from '../../../actions/posts';
 
 import useStyles from './styles';
 
-// destructed the props as post 
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -50,39 +49,51 @@ const Post = ({ post, setCurrentId }) => {
 
     return (
         <Card className={classes.card} raised elevation={6}>
-            <ButtonBase className={classes.cardAction} onClick={openPost}>
-                <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
-                <div className={classes.overlay}>
-                    <Typography variant="h6">{post.name}</Typography>
-                    <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
-                </div>
-                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                <div className={classes.overlay2}>
-                    <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
-                        <MoreHorizIcon fontSize="medium" />
-                    </Button>
-                </div>
-                )}
-                <div className={classes.details}>
-                    <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
-                </div>
-                <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
-                <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
-                </CardContent>
-            </ButtonBase>
-            <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
-                    <Likes />
-                </Button>
-                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
-                        <DeleteIcon fontSize='small'/>
-                    </Button>
-                )} 
-            </CardActions>
-        </Card>
-    );
-}
+      <ButtonBase
+        component="span"
+        name="test"
+        className={classes.cardAction}
+        onClick={openPost}
+      >
+        <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
+        <div className={classes.overlay}>
+          <Typography variant="h6">{post.name}</Typography>
+          <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+        </div>
+        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+        <div className={classes.overlay2} name="edit">
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentId(post._id);
+            }}
+            style={{ color: 'white' }}
+            size="small"
+          >
+            <MoreHorizIcon fontSize="default" />
+          </Button>
+        </div>
+        )}
+        <div className={classes.details}>
+          <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+        </div>
+        <Typography className={classes.title} gutterBottom variant="h5" component="h2">{post.title}</Typography>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">{post.message.split(' ').splice(0, 20).join(' ')}...</Typography>
+        </CardContent>
+      </ButtonBase>
+      <CardActions className={classes.cardActions}>
+        <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
+          <Likes />
+        </Button>
+        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+          <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
+            <DeleteIcon fontSize="small" /> &nbsp; Delete
+          </Button>
+        )}
+      </CardActions>
+    </Card>
+  );
+};
 
 export default Post;
