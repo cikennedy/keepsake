@@ -43,8 +43,8 @@ const Form = ({ currentId, setCurrentId }) => {
     if(!user?.result?.name) {
         return (
             <Paper className={classes.paper}>
-                <Typography variant="h6" align="center">
-                    Sign in for full features. 
+                <Typography variant="h5" align="center" >
+                    Please sign in to unlock full features!  
                 </Typography>
             </Paper>
         )
