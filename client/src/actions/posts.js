@@ -108,5 +108,6 @@ export const commentPost = (value, id) => async (dispatch) => {
     return data.comments;
   } catch (error) {
     console.log(error);
+    console.log(error.message)
   }
 };
