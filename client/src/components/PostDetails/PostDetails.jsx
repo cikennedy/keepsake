@@ -74,7 +74,7 @@ const Post = () => {
           <img className={classes.media} src={post.selectedFile} alt={post.title} />
         </div>
       </div>
-      {/* {!!recommendedPosts.length && (
+      {!!recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">You might also like:</Typography>
           <Divider />
@@ -90,7 +90,7 @@ const Post = () => {
             ))}
           </div>
         </div>
-      )} */}
+      )}
     </Paper>
   );
 };
